@@ -188,7 +188,7 @@ a:hover {
   position: absolute;
   height: 3px;
   background-color: #0078ff;
-  width: 100px;
+  width: 64px;
   bottom: -12px;
 }
 
@@ -852,11 +852,12 @@ a:hover {
   background-color: #cde1f8;
   margin: 0.5rem 0 1.2rem 0;
   border-radius: 0;
-  height: 0.7rem;
+  height: 3px;
+  border-radius: 50px;
 }
 
 .skill-mf .progress .progress-bar {
-  height: 0.7rem;
+  height: 3px;
   background-color: #0078ff;
 }
 

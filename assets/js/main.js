@@ -33,8 +33,9 @@
     document.getElementById('about_name').textContent = data.name;
     document.getElementById('about_profile').textContent = data.job;
     document.getElementById('about_mail').textContent = data.email;
-    document.getElementById('about_phone').textContent = '+20 ' + data.phone;
+    document.getElementById('about_phone').textContent = '+2 ' + data.phone;
     document.getElementById('about-details').textContent = data.about_details;
+
 
 
     /* Counters */
@@ -50,15 +51,34 @@
 
     /* Contact Section */
     document.getElementById('contact-message').textContent = data.contact_message;
-    document.getElementById('contact-phone').textContent = '+20 ' + data.phone;
+    document.getElementById('contact-phone').textContent = '+2 ' + data.phone;
     document.getElementById('contact-mail').textContent = data.email;
     document.getElementById('contact-address').textContent = data.address;
     document.getElementById('facebook-link').href = data.facebook;
     document.getElementById('linkedin-link').href = data.linkedin;
     document.getElementById('github-link').href = data.github;
-    document.getElementById('discord-link').href = data.discord;
-    
 
+    document.getElementById('discord-link').addEventListener("click", function(event){
+      event.preventDefault()
+      navigator.clipboard.writeText(data.discord);
+      toast("Discord User Name Copied", 'fade', 'bottom-left', 'Copied!', 'success', '#3c763d', 'white', true);
+
+    });
+
+
+  })
+  .catch(error => console.log('Error'));
+
+
+  var skill_no = 0
+  var skill_sec = $('#skills');
+  fetch("https://portfolio.alalfy.com/api/skills")
+  .then((response) => response.json())
+  .then((a) => {
+    a.data.forEach(skill => {
+      skill_sec.append( '<div class="col-6"> <span>' + skill.name + '</span> <div class="progress"> <div class="progress-bar" role="progressbar" style="width: ' + skill.percent + '%;" aria-valuenow="' + skill.percent + '" aria-valuemin="0" aria-valuemax="100"></div> </div> </div>');
+    })
+    
   })
   .catch(error => console.log('Error'));
 
@@ -270,3 +290,21 @@
   
 
 })()
+
+
+
+function toast(message, trans, position, heading, icon, bgColor, textColor, close){
+  $.toast({ 
+    heading: heading,
+    text : message, 
+    showHideTransition : trans,  
+    bgColor : bgColor,              
+    textColor : textColor,            
+    allowToastClose : close,       
+    hideAfter : 5000,
+    icon: icon,              
+    stack : 5,                     
+    textAlign : 'left',            
+    position : position
+  })
+}
